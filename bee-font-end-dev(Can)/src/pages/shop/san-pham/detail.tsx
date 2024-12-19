@@ -42,11 +42,11 @@ const detailSanPham: React.FC = () => {
   const [titleMauSac, setTitleMauSac] = useState("");
   const [titleKichCo, setTitleKichCo] = useState("");
   const [titleLoaiDe, setTitleLoaiDe] = useState("");
-  const [titleDiaHinhSan, setTitleDiaHinhSan] = useState("");
+  // const [titleDiaHinhSan, setTitleDiaHinhSan] = useState("");
   const [idMauSac, setIdMauSac] = useState(null);
   const [idKichCo, setIdKichCo] = useState(null);
   const [idLoaiDe, setIdLoaiDe] = useState(null);
-  const [idDiaHinhSan, setIdDiaHinhSan] = useState(null);
+  // const [idDiaHinhSan, setIdDiaHinhSan] = useState(null);
   const [idGioHang, setIdGioHang] = useState(null);
 
   const [anhDaiDien, setAnhDaiDien] = useState("");
@@ -138,7 +138,7 @@ const detailSanPham: React.FC = () => {
           idMauSac: idMauSac,
           idKichCo: idKichCo,
           idLoaiDe: idLoaiDe,
-          idDiaHinhSan: idDiaHinhSan,
+          // idDiaHinhSan: idDiaHinhSan,
         },
       });
       const sanPhamList = res.data;
@@ -195,22 +195,18 @@ const detailSanPham: React.FC = () => {
 
   const onFinish = async () => {
     // Kiểm tra thông tin sản phẩm
-    if (
-      idMauSac === null ||
-      idKichCo === null ||
-      idLoaiDe === null ||
-      idDiaHinhSan === null
-    ) {
+    if (idMauSac === null || idKichCo === null || idLoaiDe === null) {
       message.error("Bạn chưa nhập thông tin sản phẩm muốn thêm vào giỏ hàng");
       return;
-    } else if (totalQuantity <= 0) { // Kiểm tra số lượng tồn kho
+    } else if (totalQuantity <= 0) {
+      // Kiểm tra số lượng tồn kho
       message.error("Sản phẩm đã hết hàng");
       return;
     }
-  
+
     try {
       let cartId;
-  
+
       // Không null thì sử dụng trực tiếp
       if (idGioHangTaiKhoan != null) {
         cartId = idGioHangTaiKhoan;
@@ -218,7 +214,7 @@ const detailSanPham: React.FC = () => {
         // Otherwise, use the provided idGioHangNull or generate a new one
         cartId = await getCartId();
       }
-  
+
       // Lấy thông tin chi tiết sản phẩm
       const productResponse = await request.get(
         "/chi-tiet-san-pham/get-one/" + id,
@@ -226,32 +222,34 @@ const detailSanPham: React.FC = () => {
           params: {
             idMauSac: idMauSac,
             idKichCo: idKichCo,
-            idDiaHinhSan: idDiaHinhSan,
+            // idDiaHinhSan: idDiaHinhSan,
             idLoaiDe: idLoaiDe,
           },
         }
       );
-  
+
       if (productResponse.data) {
         const productDetail = productResponse.data;
         const stockQuantity = productDetail.soLuong; // Số lượng tồn kho
-  
+
         // Lấy số lượng hiện tại trong giỏ hàng
         const cartResponse = await request.get(`/gio-hang/${cartId}`);
         const cartItems = cartResponse.data.gioHangChiTietList || [];
         const existingItem = cartItems.find(
           (item: any) => item.chiTietSanPham.id === productDetail.id
         );
-  
+
         const existingQuantity = existingItem ? existingItem.soLuong : 0;
         const totalQuantityInCart = existingQuantity + quantity; // Tổng số lượng dự kiến
-  
+
         // Kiểm tra số lượng tồn kho
         if (totalQuantityInCart > stockQuantity) {
-          message.warning(`Số lượng giỏ hàng của bạn đã vượt quá số lượng trong kho là ${stockQuantity}`);
+          message.warning(
+            `Số lượng giỏ hàng của bạn đã vượt quá số lượng trong kho là ${stockQuantity}`
+          );
           return; // Dừng lại không thêm sản phẩm
         }
-  
+
         // Thêm sản phẩm vào giỏ hàng nếu số lượng hợp lệ
         await request.post("/gio-hang-chi-tiet", {
           gioHang: {
@@ -260,7 +258,7 @@ const detailSanPham: React.FC = () => {
           soLuong: quantity,
           chiTietSanPham: { id: productDetail.id },
         });
-  
+
         message.success("Thêm sản phẩm vào giỏ hàng thành công");
         await navigate("/gio-hang");
       }
@@ -269,7 +267,6 @@ const detailSanPham: React.FC = () => {
       console.log(error);
     }
   };
-  
 
   const handleMauSac = (event) => {
     setIdMauSac(event.id !== idMauSac ? event.id : null);
@@ -287,11 +284,11 @@ const detailSanPham: React.FC = () => {
     setTitleLoaiDe(event.ten);
   };
 
-  const handleDiaHinhSan = (event) => {
-    setQuantity(1);
-    setTitleDiaHinhSan(event.ten);
-    setIdDiaHinhSan(event.id === idDiaHinhSan ? null : event.id);
-  };
+  // const handleDiaHinhSan = (event) => {
+  //   setQuantity(1);
+  //   setTitleDiaHinhSan(event.ten);
+  //   setIdDiaHinhSan(event.id === idDiaHinhSan ? null : event.id);
+  // };
 
   useEffect(() => {
     sanPham();
@@ -300,7 +297,7 @@ const detailSanPham: React.FC = () => {
     fetchDataLoaiDe();
     fetchDataSize();
     fetchDataDHS();
-  }, [idMauSac, idKichCo, idLoaiDe, idDiaHinhSan]);
+  }, [idMauSac, idKichCo, idLoaiDe]);
   useEffect(() => {
     hinhAnh();
   }, [idMauSac]);
@@ -485,7 +482,7 @@ const detailSanPham: React.FC = () => {
                   ))}
                 </Row>
               </Radio.Group>
-              <Text>
+              {/* <Text>
                 Địa hình sân: {idDiaHinhSan !== null ? titleDiaHinhSan : ""}
               </Text>
               <Radio.Group buttonStyle="solid" value={idDiaHinhSan}>
@@ -504,7 +501,7 @@ const detailSanPham: React.FC = () => {
                     </Col>
                   ))}
                 </Row>
-              </Radio.Group>
+              </Radio.Group> */}
 
               <Text>Số lượng:</Text>
               <Space>

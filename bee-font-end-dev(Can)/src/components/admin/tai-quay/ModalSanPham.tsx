@@ -38,7 +38,7 @@ const ModalSanPham: React.FC<ModalSanPhamProps> = ({
   const [loaiDeOptions, setLoaiDeOptions] = useState([]);
   const [mauSacOptions, setMauSacOptions] = useState([]);
   const [kichCoOptions, setKichCoOptions] = useState([]);
-  const [diaHinhSanOptions, setDiaHinhSanOptions] = useState([]);
+  // const [diaHinhSanOptions, setDiaHinhSanOptions] = useState([]);
   const [thuongHieuOptions, setThuongHieuOptions] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
 
@@ -227,9 +227,9 @@ const ModalSanPham: React.FC<ModalSanPhamProps> = ({
         setKichCoOptions(response.data);
       });
       // Call API DiaHinhSan
-      request.get("dia-hinh-san/list").then((response) => {
-        setDiaHinhSanOptions(response.data);
-      });
+      // request.get("dia-hinh-san/list").then((response) => {
+      //   setDiaHinhSanOptions(response.data);
+      // });
       // Call API ThuongHieu
       request.get("thuong-hieu/list").then((response) => {
         setThuongHieuOptions(response.data);
@@ -373,7 +373,7 @@ const ModalSanPham: React.FC<ModalSanPhamProps> = ({
               ))}
             </Select>
           </Col>
-          <Col span={4} style={{ marginRight: 15 }}>
+          {/* <Col span={4} style={{ marginRight: 15 }}>
             <span>Địa hình sân: </span>
             <Select
               allowClear
@@ -388,7 +388,7 @@ const ModalSanPham: React.FC<ModalSanPhamProps> = ({
                 </Option>
               ))}
             </Select>
-          </Col>
+          </Col> */}
           <Col span={4}>
             <span>Thương hiệu: </span>
             <Select

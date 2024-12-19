@@ -42,7 +42,7 @@ const columns: ColumnsType<DataType> = [
         <HinhAnhSanPham chiTietSanPham={chiTietSanPham} />
         <Space direction="vertical">
           <Text strong>{chiTietSanPham.sanPham.ten}</Text>
-          <Text>{`[${chiTietSanPham.mauSac.ten} - ${chiTietSanPham.kichCo.kichCo} - ${chiTietSanPham.loaiDe.ten} - ${chiTietSanPham.diaHinhSan.ten}]`}</Text>
+          <Text>{`[${chiTietSanPham.mauSac.ten} - ${chiTietSanPham.kichCo.kichCo} - ${chiTietSanPham.loaiDe.ten}]`}</Text>
         </Space>
       </Space>
     ),
