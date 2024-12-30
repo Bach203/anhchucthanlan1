@@ -4,6 +4,7 @@ import banner1 from "~/image/banner3.jpg";
 import banner2 from "~/image/banner2.jpg";
 import banner3 from "~/image/banner1.jpg";
 import banner4 from "~/image/banner4.jpg";
+import logo_1 from "~/image/white_on_black.png";
 import nike from "~/image/brand-nike.jpg";
 import adidas from "~/image/brand-adidas.jpg";
 import puma from "~/image/brand-puma.jpg";
@@ -227,7 +228,7 @@ const Home: React.FC = () => {
         </Col>
       </Row>
       {/* ĐỊA HÌNH SÂN */}
-      <Divider style={{ fontSize: 25, fontWeight: "bold", marginTop: 20 }}>
+      {/* <Divider style={{ fontSize: 25, fontWeight: "bold", marginTop: 20 }}>
         CHỌN GIÀY THEO ĐỊA HÌNH SÂN
       </Divider>
       <Row style={{ marginTop: 30, marginBottom: 30 }}>
@@ -263,7 +264,7 @@ const Home: React.FC = () => {
             </span>
           </a>
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };

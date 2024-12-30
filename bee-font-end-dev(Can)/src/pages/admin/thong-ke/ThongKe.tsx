@@ -31,6 +31,7 @@ interface chartDataProps {
   tongSoSanPhamDaBan: number[];
   tongSoDonTaiQuay: number[];
   tongSoDonOnline: number[];
+  tongTienOnline: number[];
 }
 
 const ThongKe: React.FC = () => {
@@ -249,8 +250,8 @@ const ThongKe: React.FC = () => {
 
   return (
     <>
-      <Row style={{ margin: "20px" }}>
-        <Col span={24}>
+      <Row style={{ margin: "20px" }} gutter={[16, 16]}>
+        <Col span={12}>
           <Card
             title="Thống Kê Theo Ngày"
             hoverable
@@ -267,10 +268,7 @@ const ThongKe: React.FC = () => {
             <ChartThongKe title="Thống Kê Theo Ngày" data={thongKeNgay} />
           </Card>
         </Col>
-      </Row>
-
-      <Row style={{ margin: "20px" }}>
-        <Col span={24}>
+        <Col span={12}>
           <Card
             title="Thống Kê Theo Tuần"
             hoverable
@@ -290,8 +288,9 @@ const ThongKe: React.FC = () => {
         </Col>
       </Row>
 
-      <Row style={{ margin: "20px" }}>
-        <Col span={24}>
+      <Row style={{ margin: "20px" }} gutter={[16, 16]}>
+        {/* Biểu đồ 3 */}
+        <Col span={12}>
           <Card
             title="Thống Kê Theo Tháng"
             hoverable
@@ -309,10 +308,7 @@ const ThongKe: React.FC = () => {
             <ChartThongKe title="Thống Kê Theo Tháng" data={thongKeThang} />
           </Card>
         </Col>
-      </Row>
-
-      <Row style={{ margin: "20px" }}>
-        <Col span={24}>
+        <Col span={12}>
           <Card
             title="Thống Kê Theo Năm"
             hoverable
